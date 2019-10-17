@@ -1,0 +1,32 @@
+{
+  "expression_rules":  [
+    {"maxLineLength": 80},
+    {"evenIndentationNumber":  true}
+  ],
+  "constants":  [
+    {
+      "naming": [
+        {"type-location":  1},
+        {"type-string":  "TEXT"},
+        {"type-Text?list":  "TEXT"},
+        {"type-int":  "INT"},
+        {"type-Integer?list":  "INT"},
+        {"type-boolean":  "BOOL"},
+        {"type-Group":  "GRP"},
+        {"type-DataStoreEntity":  "ENTITY"},
+        {"type-DataStoreEntity?list":  "ENTITIES"},
+        {"type-RecordType":  "RCD"},
+        {"type-ProcessModel":  "PM"},
+        {"type-knowledge-center":  "KC"},
+        {"type-document":  "DOC"},
+        {"type-report":  "RPT"},
+        {"type-scs":  "SCS"},
+        {"type-time":  "TIME"},
+        {"type-CollaborationFolder":  "FOLDER"},
+        {"type-date":  "DATE"},
+        {"type-CollaborationDocument":  "DOC"}
+
+      ]
+    }
+  ]
+}
