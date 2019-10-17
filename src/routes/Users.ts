@@ -16,7 +16,7 @@ const ruleName = '\\rules\\testing.json';
 const projectRootName = 'appian-linter';
 const appnLinterNum = __dirname.indexOf(projectRootName);
 const ruleLocation = __dirname.substring(0, appnLinterNum) + projectRootName + ruleName;
-const projectRootPath = 'C:\\Users\\AlexPersinger\\WebstormProjects\\appian-linter';
+const projectRootPath = 'C:\\Users\\apfba\\WebstormProjects\\appian-linter';
 
 // Init shared
 const router = Router();
@@ -46,54 +46,40 @@ router.post('/file', upload.single('file'), (req: any, res: any, next: any) => {
         .promise()
         .then(() => {
             const lintResult: any = [];
-            let ruleDef = '';
-            let retData: any[] = [];
             const directory = `${projectRootPath}\\uploads\\unzipped\\${req.file.filename.substr(0, req.file.filename.indexOf('.'))}\\content`;
-
-            fs.readdirSync(directory).forEach((file: any) => {
-                const fullFilePath = directory + '\\' + file;
-                try {
-                    fs.accessSync(fullFilePath);
-                    const data = fs.readFileSync(fullFilePath);
-                    parser.parseString(data, (err: any, result: any) => {
-                        const baseDefinition = result['contentHaul'];
-                        switch (true) {
-                            case baseDefinition['constant'] !== undefined:
-                                retData = ParserHelper.routeObjectParser(ruleLocation, baseDefinition['constant']);
-                                lintResult.push({
-                                    type: 'constant',
-                                    name: baseDefinition['constant'][0]['name'][0],
-                                    data: retData,
-                                });
-
-                                break;
-                            case baseDefinition['rule'] !== undefined:
-                                ruleDef = result['contentHaul']['rule'][0]['definition'][0];
-                                retData = ParserHelper.routeObjectParser(ruleLocation, ruleDef);
-                                lintResult.push({
-                                    type: 'rule',
-                                    name: result['contentHaul']['rule'][0]['name'][0],
-                                    data: retData,
-                                });
-                                break;
-                            default:
-                                lintResult.push({
-                                    type: 'unknown',
-                                    name: 'unknown',
-                                    data: {},
-                                });
-                                break;
+            if (fs.lstatSync(directory).isDirectory()) {
+                fs.readdir(directory, (fileErr: any, files: any) => {
+                    files.forEach((file: any) => {
+                        const fullFilePath = directory + '\\' + file;
+                        try {
+                            fs.accessSync(fullFilePath);
+                            const data = fs.readFileSync(fullFilePath);
+                            parser.parseString(data, (err: any, result: any) => {
+                                const baseDefinition = result['contentHaul'];
+                                console.log(ruleLocation);
+                                lintResult.push(
+                                    ParserHelper.routeObjectParser(
+                                        ruleLocation,
+                                        baseDefinition,
+                                    ),
+                                );
+                            });
+                        } catch (e) {
+                            console.log(e);
+                            lintResult.push({
+                                type: 'unknown',
+                                name: 'unknown',
+                                data: e,
+                            });
                         }
                     });
-                } catch (e) {
-                    res.send(e);
-                }
-            });
-            console.log('FIN');
-            res.send(lintResult);
+                    res.send(lintResult);
+                });
+            }
         })
         .catch((e: any) => {
             console.log(e);
+            res.send(e);
         });
 });
 

@@ -1,6 +1,7 @@
 import {ObjectTypes} from '../Enums/ObjectTypes';
 import {ConstantParser} from './ConstantParser';
-import {RuleParser} from "./RuleParser";
+import {RuleParser} from './RuleParser';
+import * as fs from 'fs';
 
 export class ParserHelper {
     public static routeObjectParser(ruleLocation: string, baseDefinition: any): any {
@@ -8,18 +9,18 @@ export class ParserHelper {
         let retData: any[];
         switch (true) {
             case baseDefinition[ObjectTypes.CONSTANT] !== undefined:
-                retData = ConstantParser.ruleEntry(ruleLocation, baseDefinition['constant'], 'constant');
+                retData = ConstantParser.ruleEntry(ruleLocation, baseDefinition[ObjectTypes.CONSTANT], 'constant');
                 valueToReturn = {
                     type: 'constant',
-                    name: baseDefinition['constant'][0]['name'][0],
+                    name: baseDefinition[ObjectTypes.CONSTANT][0]['name'][0],
                     data: retData,
                 };
                 break;
             case baseDefinition[ObjectTypes.INTERFACE] !== undefined:
-                retData = RuleParser.ruleEntry(ruleLocation, baseDefinition['contentHaul']['rule'][0]['definition'][0], 'rule');
+                retData = RuleParser.ruleEntry(ruleLocation, baseDefinition[ObjectTypes.INTERFACE][0]['definition'][0], 'rule');
                 valueToReturn = {
                     type: 'rule',
-                    name: baseDefinition['contentHaul']['rule'][0]['name'][0],
+                    name: baseDefinition[ObjectTypes.INTERFACE][0]['name'][0],
                     data: retData,
                 };
                 break;
@@ -31,5 +32,6 @@ export class ParserHelper {
                 };
                 break;
         }
+        return valueToReturn;
     }
 }
