@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "fb88df81-c4c9-41d6-aa92-aa22a66a55f3",
+		"name": "Appian Linter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Parse a Package",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "package",
+							"type": "file",
+							"src": "/C:/Users/apfba/WebstormProjects/appian-linter/example-packages/Constants Linter Test - All Valid.zip"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/linter/package",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"linter",
+						"package"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

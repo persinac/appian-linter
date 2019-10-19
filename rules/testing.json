@@ -22,11 +22,25 @@
         {"type-report":  "RPT"},
         {"type-scs":  "SCS"},
         {"type-time":  "TIME"},
-        {"type-CollaborationFolder":  "FOLDER"},
+        {"type-CollaborationFolder":  "FLDR"},
         {"type-date":  "DATE"},
-        {"type-CollaborationDocument":  "DOC"}
-
+        {"type-CollaborationDocument":  "DOC"},
+        {"type-UserOrGroup":  "UOG"},
+        {"type-Application":  "APPL"},
+        {"type-ConnectedSystem":  "CS"},
+        {"type-dateTime":  "DT"},
+        {"type-CollaborationDocumentOrFolder":  "DOF"},
+        {"type-EmailAddress":  "EA"},
+        {"type-GroupType":  "GT"},
+        {"type-CollaborationKnowledgeCenter":  "KC"},
+        {"type-double":  "DEC"},
+        {"type-TempoReport":  "RPT"},
+        {"type-SiteDesignObject":  "SITE"},
+        {"type-TaskReport":  "TRPT"},
+        {"type-User":  "USR"}
       ]
-    }
+    },
+    {"is-all-upper": true},
+    {"alpha-underscore": true}
   ]
 }
